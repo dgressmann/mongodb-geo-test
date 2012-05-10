@@ -61,23 +61,47 @@ app.get('/pois', function(req, res){
    }
 });
 app.get('/nearest', function(req, res) {
-   if (req.lon && req.lat) {
+   console.log("req %s '%s'", req.xhr, JSON.stringify({lat: req.param('lat'), lon: req.param('lon')}));
+   if (req.param('lat') && req.param('lon')) {
+      lat = parseFloat(req.param('lat'));
+      lon = parseFloat(req.param('lon'));
+      console.log("latlng available");
       var nearest;
-      db.command({geoNear: 'paris', near: [req.lon,req.lat], num: 10, distanceMultiplier: 6378, spherical: true}, function(err, points){
-         var found = false;
-         while (!found) {
-            // iterate over the points, until one without radius or distance < radius is found
+      db.command({geoNear: 'paris', near: [lon, lat], num: 10, distanceMultiplier: 6378000, spherical: true}, function(err, points){
+         if (err) { 
+            console.log(JSON.stringify(err));
+            throw err;
+         }
+//         console.log("points: %s %s", typeof points, JSON.stringify(points));
+         console.log("stats: %s",JSON.stringify(points.stats));
+  //       console.log("results: %s",JSON.stringify(points.results));
+    //     console.log("results[0]: %s",JSON.stringify(points.results[0]));
+         if (points.stats.objectLoaded == 0){
+            console.log("no points");
+            res.render('nopoints', {layout: false});
+         }
+         else {
+            for (var i =0; i < points.results.length; i++ ) {
+               nearest = point = points.results[i];
+               distance = nearest.dis;
+               console.log(JSON.stringify(nearest));
+               if (point.obj.radius) { // the point has a radius
+                  console.log("distance: %s. radius: %s", distance, point.obj.radius);
+                  if ( distance < point.obj.radius) break; // distance is smaller than radius
+               }
+               else {
+                  break;
+               }
+            }
+            var obj = nearest.obj;
+            console.log("Nearest: %s", JSON.stringify(nearest));
+            res.render(obj._id, { layout: false, title: obj.desc, lat: obj.loc.lat, lon: obj.loc.lon, distance: distance});
          }
       });
-      if (nearest){
-         res.render(template, { title: , lat: , lon: , distance: });
-      }
-      else {
-         res.render('instructions');
-      }
    }
    else {
-      res.render('instructions');
+      console.log("no latlng");
+      res.render('instructions', {layout: false});
    }
 });
 

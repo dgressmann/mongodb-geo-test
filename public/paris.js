@@ -19,7 +19,7 @@ function setMarker(lat, lng, map, title, showCircle) {
 }
 
 function nearestInfo(lat,lon){
-   $.post("/nearest",{lat: lat, lon: lon}, function(data) { $("#info").empty().append(data); });
+   $.get("/nearest",{lat: lat, lon: lon}, function(data) { $("#info").empty().append(data); });
 }
 
 function initialize() {
@@ -40,7 +40,7 @@ function initialize() {
    var me = new google.maps.Marker({position:pos,map:map,icon:'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png',title:'My current location', draggable: true});
    google.maps.event.addListener(me, 'dragend', function() { 
       console.log("Loc: %s", me.getPosition().toString());
-      nearestInfo(me.getPosition.lat(),me.getPosition().lon());
+      nearestInfo(me.getPosition().lat(),me.getPosition().lng());
    });
    nearestInfo();
 }
