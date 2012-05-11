@@ -8,7 +8,6 @@ var express = require('express')
 
 var app = module.exports = express.createServer();
 var mongo = require('mongoskin');
-var db = mongo.db('localhost:27017/test?auto_reconnect=true');
 
 // Configuration
 
@@ -28,6 +27,8 @@ app.configure('development', function(){
 app.configure('production', function(){
    app.use(express.errorHandler());
 });
+
+var db = mongo.db( process.env.MONGOLAB_URI || 'localhost:27017/test?auto_reconnect=true');
 
 // Routes
 
