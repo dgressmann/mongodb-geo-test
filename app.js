@@ -72,10 +72,7 @@ app.get('/nearest', function(req, res) {
             console.log(JSON.stringify(err));
             throw err;
          }
-//         console.log("points: %s %s", typeof points, JSON.stringify(points));
          console.log("stats: %s",JSON.stringify(points.stats));
-  //       console.log("results: %s",JSON.stringify(points.results));
-    //     console.log("results[0]: %s",JSON.stringify(points.results[0]));
          if (points.stats.objectLoaded == 0){
             console.log("no points");
             res.render('nopoints', {layout: false});
