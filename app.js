@@ -31,35 +31,10 @@ app.configure('production', function(){
 
 // Routes
 
-//app.get('/', routes.index);
 app.get('/', function(req, res){
-   var points 
-   db.collection('paris').find({ loc: { $near: [2.298800,48.854355] }}).toArray(function(err, points){
-      if (err){
-         console.log("Oops! Error: %s", err);
-      }
-      else {
-         console.log("Result:\n%s", points);
+   res.render('index', { title: 'Getting to the Eiffel tower'});
+}); 
 
-         res.render('index', { title: 'Getting to the Eiffel tower', points: points })
-      }
-   }); 
-//res.render('index', { title: 'Getting to the Eiffel tower' })
-});
-app.get('/pois', function(req, res){
-   if (req.xhr){
-      var points = db.command({ geoNear:'paris', near: [2.298800,48.854355], 
-         num: 10, spherical: true}, function(err, result){
-            if (err){
-               console.log("Oops! Error: %s", err);
-            }
-            else {
-               console.log("Result:\n%s", result);
-            }
-         }); 
-      res.send({});
-   }
-});
 app.get('/nearest', function(req, res) {
    console.log("req %s '%s'", req.xhr, JSON.stringify({lat: req.param('lat'), lon: req.param('lon')}));
    if (req.param('lat') && req.param('lon')) {
