@@ -5,9 +5,10 @@ html(lang="en")
     style(type="text/css")
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
-      #frame { width: 1000px; height: 485px; margin: 50px; display: inline-block }
+      #frame { width: 914px; height: 485px; margin: 50px; }
       #map_canvas { width:640px; height:480px; float: left; border: 1px solid #A4A4A4}
       #info { width: 250px; height:476px; margin: 0px 5px; border: 1px solid #A4A4A4; float: left; padding: 2px 5px}
+      #credits {float: left; width: 905px; padding: 1px 1px; border: 1px solid #A4A4A4; margin: 4px 0px}
     script(type="text/javascript", src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC53NfBlmn3k-B5CYYAHgMI2daUAXccL8Q&sensor=true")
     script(type="text/javascript", src="/javascripts/jquery-1.7.2.min.js")
     script(type="text/javascript", src="/javascripts/paris.js")
@@ -16,3 +17,12 @@ html(lang="en")
       h1 Geo-location example Eiffel tower area
       #map_canvas
       #info
+      #credits
+        strong Created using:
+        a(href="http://mapicons.nicolasmollet.com/")
+          img(src="/images/milogo.gif")
+        a(href="http://jquery.org/")
+          img(src="/images/jquery.png", height="55")
+        a(href="http://nodejs.org/")
+          img(src="/images/nodelogo.png", height="55")
+      small Daniel Gressmann
