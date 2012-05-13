@@ -10,7 +10,17 @@ function setMarker(markerOptions) {
    else {
       content = markerOptions.title;
    }
-   var options = {position:pos,map: map, title: markerOptions.title, content: content, draggable: false};
+   var icon;
+   if (markerOptions.icon) {
+      icon = markerOptions.icon;
+   }
+   else {
+      icon = '/images/underground.png';
+   }
+
+   var options = {position:pos, map: map, title: markerOptions.title, 
+                  icon: icon, shadow: '/images/shadow.png',
+                  content: content, draggable: false};
    var marker = new google.maps.Marker(options);
 
    google.maps.event.addListener(marker, 'click', function() {
@@ -43,12 +53,12 @@ function initialize() {
    setMarker({lat: 48.853645, lng: 2.289355, title: 'Bir-Hakeim metro station'});
    setMarker({lat: 48.857770, lng: 2.310560, title: 'La Tour-Maubourg metro station'});
    setMarker({lat: 48.854690, lng: 2.306315, title: 'Ecole Militaire metro station'});
-   setMarker({lat: 48.857910, lng: 2.29510,  title: 'Eiffel tower', radius: 50});
+   setMarker({lat: 48.857910, lng: 2.29510,  title: 'Eiffel tower', radius: 50, icon: '/images/eiffel.png'});
    setMarker({lat: 48.848900, lng: 2.297945, title: 'La Motte-Picquet - Grenelle'});
 
-   var me = new google.maps.Marker({position:pos ,map:map ,
-      icon:'http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png',
-       title:'My current location', draggable: true});
+   var me = new google.maps.Marker({position: pos, map: map,
+      icon: '/images/smiley.png', shadow: '/images/shadow.png',
+       title: 'My current location', draggable: true});
 
    new google.maps.Marker(myOptions);
    google.maps.event.addListener(me, 'dragend', function() {
