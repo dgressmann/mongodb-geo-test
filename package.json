@@ -8,7 +8,7 @@
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
-    , "jade": "0.0.1"
+    , "jade": ">= 0.16.2"
     , "mongodb": "1.0.0"
     , "mongoskin": "0.3.5"
   }
