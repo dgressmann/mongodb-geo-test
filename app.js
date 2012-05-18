@@ -9,6 +9,12 @@ var express = require('express')
 var app = module.exports = express.createServer();
 var mongo = require('mongoskin');
 
+var debug = function(message, param1, param2){
+   if (app.settings.env == 'development') {
+     console.log('DEBUG: ' + message, param1, param2);
+   }
+}
+
 // Configuration
 
 app.configure(function(){
@@ -37,29 +43,29 @@ app.get('/', function(req, res){
 }); 
 
 app.get('/nearest', function(req, res) {
-   console.log("req %s '%s'", req.xhr, JSON.stringify({lat: req.param('lat'), lon: req.param('lon')}));
+   debug("req %s '%s'", req.xhr, JSON.stringify({lat: req.param('lat'), lon: req.param('lon')}));
    if (req.param('lat') && req.param('lon')) {
       lat = parseFloat(req.param('lat'));
       lon = parseFloat(req.param('lon'));
-      console.log("latlng available");
+      debug("latlng available");
       var nearest;
       db.command({geoNear: 'paris', near: [lon, lat], num: 10, distanceMultiplier: 6378000, spherical: true}, function(err, points){
          if (err) { 
             console.log(JSON.stringify(err));
             throw err;
          }
-         console.log("stats: %s",JSON.stringify(points.stats));
+         debug("stats: %s",JSON.stringify(points.stats));
          if (points.stats.objectLoaded == 0){
-            console.log("no points");
+            debug("no points");
             res.render('nopoints', {layout: false});
          }
          else {
             for (var i =0; i < points.results.length; i++ ) {
                nearest = point = points.results[i];
                distance = nearest.dis;
-               console.log(JSON.stringify(nearest));
+               debug(JSON.stringify(nearest));
                if (point.obj.radius) { // the point has a radius
-                  console.log("distance: %s. radius: %s", distance, point.obj.radius);
+                  debug("distance: %s. radius: %s", distance, point.obj.radius);
                   if ( distance < point.obj.radius) break; // distance is smaller than radius
                }
                else {
@@ -67,14 +73,14 @@ app.get('/nearest', function(req, res) {
                }
             }
             var obj = nearest.obj;
-            console.log("Nearest: %s", JSON.stringify(nearest));
+            debug("Nearest: %s", JSON.stringify(nearest));
             distance = Math.round(distance*100)/100;
             res.render(obj._id, { layout: false, title: obj.desc, lat: obj.loc.lat, lon: obj.loc.lon, distance: distance});
          }
       });
    }
    else {
-      console.log("no latlng");
+      debug("no latlng");
       res.render('instructions', {layout: false});
    }
 });
