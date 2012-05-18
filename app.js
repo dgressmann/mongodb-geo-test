@@ -9,9 +9,9 @@ var express = require('express')
 var app = module.exports = express.createServer();
 var mongo = require('mongoskin');
 
-var debug = function(message, param1, param2){
+var debug = function() {
    if (app.settings.env == 'development') {
-     console.log('DEBUG: ' + message, param1, param2);
+     console.log.apply(this, arguments);
    }
 }
 
