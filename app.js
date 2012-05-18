@@ -68,6 +68,7 @@ app.get('/nearest', function(req, res) {
             }
             var obj = nearest.obj;
             console.log("Nearest: %s", JSON.stringify(nearest));
+            distance = Math.round(distance*100)/100;
             res.render(obj._id, { layout: false, title: obj.desc, lat: obj.loc.lat, lon: obj.loc.lon, distance: distance});
          }
       });
