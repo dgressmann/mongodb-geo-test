@@ -19,7 +19,7 @@ function setMarker(markerOptions) {
    }
 
    var options = {position:pos, map: map, title: markerOptions.title, 
-                  icon: icon, shadow: '/images/shadow.png',
+                  icon: icon, shadow: '/images/shadow.png', zIndex: 1,
                   content: content, draggable: false};
    var marker = new google.maps.Marker(options);
 
@@ -57,7 +57,7 @@ function initialize() {
    setMarker({lat: 48.848900, lng: 2.297945, title: 'La Motte-Picquet - Grenelle'});
 
    var me = new google.maps.Marker({position: pos, map: map,
-      icon: '/images/smiley.png', shadow: '/images/shadow.png',
+      icon: '/images/smiley.png', shadow: '/images/shadow.png', zIndex: 10,
        title: 'My current location', draggable: true});
 
    new google.maps.Marker(myOptions);
