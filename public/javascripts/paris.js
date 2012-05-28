@@ -3,13 +3,14 @@ var panorama;
 var infoWindow = new google.maps.InfoWindow();
 
 function setMarker(markerOptions) {
-   var pos = new google.maps.LatLng(markerOptions.lat, markerOptions.lng);
 
-   var options = {position:pos, map: map, title: markerOptions.title, 
-                  icon: icon, shadow: '/images/shadow.png', zIndex: 1,
-                  content: content, draggable: false};
    var content = markerOptions.content || markerOptions.title;
    var icon = markerOptions.icon || '/images/underground.png';
+
+   var options = {
+      position: new google.maps.LatLng(markerOptions.lat, markerOptions.lng),
+      map: map, title: markerOptions.title, icon: icon, shadow: '/images/shadow.png', 
+      zIndex: 1, content: content, draggable: false};
    var marker = new google.maps.Marker(options);
 
    google.maps.event.addListener(marker, 'click', function() {
