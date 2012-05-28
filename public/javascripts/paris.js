@@ -42,6 +42,12 @@ function nearestInfo(pos){
    req.send(null);
 }
 
+function adjustMapBounds(){
+   if (!map.getBounds().contains(panorama.getPosition())) {
+      map.panTo(panorama.getPosition());
+   }
+}
+
 function initialize() {
    var pos = new google.maps.LatLng(48.854355,2.298800);
    var mapOptions = {
@@ -63,13 +69,15 @@ function initialize() {
    setMarker({lat: 48.857910, lng: 2.29510,  title: 'Eiffel tower', radius: 50, icon: '/images/eiffel.png'});
    setMarker({lat: 48.848900, lng: 2.297945, title: 'La Motte-Picquet - Grenelle'});
 
-   google.maps.event.addListener(panorama, 'position_changed', function() {
-      var panPos = panorama.getPosition();
-      if (!map.getBounds().contains(panPos)) {
-        map.panTo(panPos);
-      }
-      nearestInfo(panPos);
+   google.maps.event.addListener(panorama, 'pov_changed', function() {
+      adjustMapBounds();
    });
+
+   google.maps.event.addListener(panorama, 'position_changed', function() {
+      adjustMapBounds();
+      nearestInfo(panorama.getPosition());
+   });
+
    map.setStreetView(panorama);
    nearestInfo(panorama.getPosition());
 }
