@@ -37,8 +37,20 @@ function setMarker(markerOptions) {
    }
 }
 
-function nearestInfo(lat,lon){
-   $.get("/nearest",{lat: lat, lon: lon}, function(data) { $("#info").empty().append(data); });
+function nearestInfo(lat,lng){
+   var req = new XMLHttpRequest();
+   req.open('GET','/nearest?lat='+lat+'&lon='+lng,true);
+   req.onreadystatechange = function () { 
+      if (req.readyState == 4 ) {
+         if (req.status == 200 ) {
+            document.getElementById("info").innerHTML=req.responseText;
+         }
+         else {
+            alert('Error making request');
+         }
+      }
+   };
+   req.send(null);
 }
 
 function initialize() {
