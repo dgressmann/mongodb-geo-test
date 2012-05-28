@@ -6,8 +6,9 @@ html(lang="en")
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #frame { width: 914px; height: 485px; margin: 50px; }
-      #map_canvas { width:640px; height:480px; float: left; border: 1px solid #A4A4A4}
-      #info { width: 250px; height:476px; margin: 0px 5px; border: 1px solid #A4A4A4; float: left; padding: 2px 5px}
+      #streetview { width:640px; height:480px; float: left; border: 1px solid #A4A4A4}
+      #info { width: 250px; height:200px; margin: 0px 5px; border: 1px solid #A4A4A4; float: left; padding: 2px 5px}
+      #map_canvas { width: 250px; height:276px; margin: 0px 5px; border: 1px solid #A4A4A4; float: left; padding: 2px 5px}
       #credits {float: left; width: 905px; padding: 1px 1px; border: 1px solid #A4A4A4; margin: 4px 0px}
     script(type="text/javascript", src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC53NfBlmn3k-B5CYYAHgMI2daUAXccL8Q&sensor=true")
     script(type="text/javascript", src="/javascripts/jquery-1.7.2.min.js")
@@ -15,8 +16,10 @@ html(lang="en")
   body(onload="initialize()")
     #frame
       h1 Geo-location example Eiffel tower area
-      #map_canvas
-      #info
+      #streetview
+      #container
+        #info
+        #map_canvas
       #credits
         strong Created using:
         a(href="http://mapicons.nicolasmollet.com/")

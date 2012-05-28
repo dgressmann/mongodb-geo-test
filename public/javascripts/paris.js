@@ -1,4 +1,5 @@
 var map;
+var panorama;
 var infoWindow = new google.maps.InfoWindow();
 
 function setMarker(markerOptions) {
@@ -42,11 +43,16 @@ function nearestInfo(lat,lon){
 
 function initialize() {
    var pos = new google.maps.LatLng(48.854355,2.298800);
-   var myOptions = {
-      center: pos, zoom: 15,
+   var mapOptions = {
+      center: pos, zoom: 14,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: false, draggable: true };
-   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+   var panoramaOptions = {
+      position: new google.maps.LatLng(48.855299,2.289587),
+      pov: { heading: 50, pitch:10, zoom: 1 }
+   };
+   map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+   panorama = new google.maps.StreetViewPanorama(document.getElementById("streetview"),panoramaOptions);
    google.maps.event.addListener(map, 'click', function() { infoWindow.close(); });
 
    setMarker({lat: 48.857320, lng: 2.285930, title: 'Passy metro station'});
@@ -56,15 +62,10 @@ function initialize() {
    setMarker({lat: 48.857910, lng: 2.29510,  title: 'Eiffel tower', radius: 50, icon: '/images/eiffel.png'});
    setMarker({lat: 48.848900, lng: 2.297945, title: 'La Motte-Picquet - Grenelle'});
 
-   var me = new google.maps.Marker({position: pos, map: map,
-      icon: '/images/smiley.png', shadow: '/images/shadow.png', zIndex: 10,
-       title: 'My current location', draggable: true});
-
-   new google.maps.Marker(myOptions);
-   google.maps.event.addListener(me, 'dragend', function() {
-      console.log("Loc: %s", me.getPosition().toString());
-      nearestInfo(me.getPosition().lat(),me.getPosition().lng());
+   google.maps.event.addListener(panorama, 'position_changed', function() {
+      nearestInfo(panorama.getPosition().lat(),panorama.getPosition().lng());
    });
-   nearestInfo();
+   map.setStreetView(panorama);
+   nearestInfo(panorama.getPosition().lat(),panorama.getPosition().lng());
 }
 
