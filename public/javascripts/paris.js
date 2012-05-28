@@ -4,24 +4,12 @@ var infoWindow = new google.maps.InfoWindow();
 
 function setMarker(markerOptions) {
    var pos = new google.maps.LatLng(markerOptions.lat, markerOptions.lng);
-   var content;
-   if (markerOptions.content) {
-      content = markerOptions.content;
-   }
-   else {
-      content = markerOptions.title;
-   }
-   var icon;
-   if (markerOptions.icon) {
-      icon = markerOptions.icon;
-   }
-   else {
-      icon = '/images/underground.png';
-   }
 
    var options = {position:pos, map: map, title: markerOptions.title, 
                   icon: icon, shadow: '/images/shadow.png', zIndex: 1,
                   content: content, draggable: false};
+   var content = markerOptions.content || markerOptions.title;
+   var icon = markerOptions.icon || '/images/underground.png';
    var marker = new google.maps.Marker(options);
 
    google.maps.event.addListener(marker, 'click', function() {
