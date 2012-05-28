@@ -37,9 +37,9 @@ function setMarker(markerOptions) {
    }
 }
 
-function nearestInfo(lat,lng){
+function nearestInfo(pos){
    var req = new XMLHttpRequest();
-   req.open('GET','/nearest?lat='+lat+'&lon='+lng,true);
+   req.open('GET','/nearest?lat='+pos.lat()+'&lon='+pos.lng(),true);
    req.onreadystatechange = function () { 
       if (req.readyState == 4 ) {
          if (req.status == 200 ) {
@@ -75,9 +75,9 @@ function initialize() {
    setMarker({lat: 48.848900, lng: 2.297945, title: 'La Motte-Picquet - Grenelle'});
 
    google.maps.event.addListener(panorama, 'position_changed', function() {
-      nearestInfo(panorama.getPosition().lat(),panorama.getPosition().lng());
+      nearestInfo(panorama.getPosition());
    });
    map.setStreetView(panorama);
-   nearestInfo(panorama.getPosition().lat(),panorama.getPosition().lng());
+   nearestInfo(panorama.getPosition());
 }
 
