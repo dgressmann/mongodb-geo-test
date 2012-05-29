@@ -1,6 +1,7 @@
 doctype 5
 html(lang="en")
   head
+    title Getting to the Eiffel tower - a MongoDB spatial demo
     meta(name="viewport", content="initial-scale=1.0, user-scalable=no")
     meta(property="og:title", content="Getting to the Eiffel tower - a MongoDB spatial demo")
     meta(property="og:type", content="website")
@@ -19,6 +20,8 @@ html(lang="en")
   body(onload="initialize()")
     #frame
       h1 Geo-location example Eiffel tower area
+      p This application is a proof of concept for combining various technologies to create a cloud-based Node.js app that uses geometric data to determine proximity to points of interest.
+      p While moving around in the street view panorama, the information box to the right will be updated to reflect position and proximity to a metro station or the Eiffel tower. The information page for the Eiffel tower will only show when you get within a radius of 50 meters from the Eiffel tower. Try navigating towards the Eiffel tower using either the panorama or drag the street view puppet to the red circle surrounding the Eiffel tower.
       #streetview
       #container
         #info
