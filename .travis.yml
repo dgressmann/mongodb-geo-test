@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- '0.10'
+deploy:
+  provider: heroku
+  api_key:
+    secure: Hi60lX6WU98Tz0MJc3Wf+4+wgxzE7KlIqUQ2WUHl+iyTIm1ElCbo6CMZfZ4nu5HP1beqyboLLrRoNTXVZUgxEpm/sP0lpLzRQGfkv7VhMUoW0yKM006XFsgX2UhB5R+6AcSaRLzFPn9p4gQV/+l7hEeUOW2o0i8wTc0ewoM3d/I=
+  app: pure-dawn-8702
+  on:
+    repo: dgressmann/mongodb-geo-test
