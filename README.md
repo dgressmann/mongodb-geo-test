@@ -3,7 +3,7 @@ Experimenting with MongoDB's Spatial Indexing sample code
 
 This repository contains the code accompanying the blog at [http://blog.iprofs.nl/2012/07/11/experimenting-with-mongodbs-spatial-indexing/](http://blog.iprofs.nl/2012/07/11/experimenting-with-mongodbs-spatial-indexing/).
 
-Current the status of this code is: [![Build Status](https://travis-ci.org/dgressmann/mongodb-geo-test.png?branch=master)](https://travis-ci.org/dgressmann/mongodb-geo-test)
+Currently the status of this code is: [![Build Status](https://travis-ci.org/dgressmann/mongodb-geo-test.png?branch=master)](https://travis-ci.org/dgressmann/mongodb-geo-test)
 
 Sample data
 -----------
