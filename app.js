@@ -36,7 +36,7 @@ app.configure('production', function(){
    app.use(express.errorHandler());
 });
 
-var db = mongo.db( process.env.MONGOLAB_URI || 'localhost:27017/test?auto_reconnect=true');
+var db = mongo.db( process.env.MONGOLAB_URI || 'localhost:27017/test?auto_reconnect=true',{safe: true});
 
 // Routes
 
