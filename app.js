@@ -21,7 +21,8 @@ app.configure(function(){
    app.set('views', __dirname + '/views');
    app.set('view engine', 'jade');
    app.set('view options', {layout: false});
-   app.use(express.bodyParser());
+   app.use(express.json());
+   app.use(express.urlencoded());
    app.use(express.methodOverride());
    app.use(app.router);
    app.use(express.static(__dirname + '/public'));
@@ -88,5 +89,5 @@ app.get('/nearest', function(req, res) {
 
 var port = process.env.PORT || 3000;
 app.listen(port, function(){
-   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+   console.log("Express server listening on port %d in %s mode", port, app.settings.env);
 });
