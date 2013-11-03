@@ -1,5 +1,9 @@
 {
   "name": "geo-testapp-dmgress",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dgressmann/mongodb-geo-test"
+  },
   "version": "0.0.2",
   "engines": {
     "node": "0.10.18",
