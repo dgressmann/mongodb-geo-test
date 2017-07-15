@@ -1,0 +1,1 @@
+Currently I archived a copy of the [original blog post](blogpost.md). Otherwise not much to see.
